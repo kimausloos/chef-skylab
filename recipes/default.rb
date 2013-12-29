@@ -1,5 +1,5 @@
 include_recipe "applications::packagemanager"
 include_recipe "skylab::postgresql"
-include_recipe "skylab::mysql"
+include_recipe "applications::mysql"
 include_recipe "skylab::apache"
 include_recipe "applications::php55"
