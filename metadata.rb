@@ -10,5 +10,5 @@ supports         'ubuntu'
 supports         'mac_os_x'
 
 depends          'applications'
-depends          'dotfiles'
 depends          'git'
+depends          'logrotate'
