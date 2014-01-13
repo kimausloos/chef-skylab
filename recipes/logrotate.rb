@@ -1,3 +1,5 @@
+include_recipe 'logrotate::default'
+
 logrotate_app "skylab-apachelog" do
   cookbook "logrotate"
   path ["/home/projects/*/apachelogs/*.log","/var/log/nowebsite.log"]

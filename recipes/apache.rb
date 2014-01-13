@@ -25,7 +25,12 @@ end
     end
 end
 
-template "/etc/apache2/conf.d/skylab.conf" do
+otherlocation = value_for_platform(
+    ["ubuntu"] => { "default" => "/etc/apache2/conf.d"},
+    "default" => "/etc/apache2/other"
+)
+
+template "#{otherlocation}/skylab.conf" do
     source "apache/skylab.conf.erb"
     owner "root"
     group value_for_platform(
@@ -33,7 +38,6 @@ template "/etc/apache2/conf.d/skylab.conf" do
         "default" => "root"
     )
     mode "0644"
-    notifies :restart, "service[apache2]"
     variables(
         :user => node['current_user']
     )
