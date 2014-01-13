@@ -1,4 +1,12 @@
-include_recipe 'logrotate::default'
+group = value_for_platform(
+            "mac_os_x" => { "default" => "admin" },
+            "default" => "root"
+        )
+
+location = value_for_platform(
+            "mac_os_x" => { "default" => "/usr/local/etc/logrotate.d" },
+            "default" => "/etc/logrotate.d"
+        )
 
 logrotate_app "skylab-apachelog" do
   cookbook "logrotate"
@@ -9,6 +17,8 @@ logrotate_app "skylab-apachelog" do
   rotate 2
   frequency "daily"
   postrotate "/usr/bin/killall -HUP apache2"
+  template_group group
+  location location
 end
 
 logrotate_app "skylab-slowlog" do
@@ -18,6 +28,8 @@ logrotate_app "skylab-slowlog" do
   size "50M"
   rotate 2
   frequency "daily"
+  template_group group
+  location location
 end
 
 logrotate_app "symfony-logs" do
@@ -27,6 +39,8 @@ logrotate_app "symfony-logs" do
   size "50M"
   rotate 5
   frequency "daily"
+  template_group group
+  location location
 end
 
 logrotate_app "tomcat-logs" do
@@ -36,4 +50,6 @@ logrotate_app "tomcat-logs" do
   size "50M"
   rotate 5
   frequency "daily"
+  template_group group
+  location location
 end
