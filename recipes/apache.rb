@@ -33,7 +33,6 @@ template "/etc/apache2/conf.d/skylab.conf" do
         "default" => "root"
     )
     mode "0644"
-    notifies :restart, "service[apache2]"
     variables(
         :user => node['current_user']
     )
