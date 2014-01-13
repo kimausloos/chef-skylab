@@ -1,3 +1,7 @@
+if platform?('mac_os_x')
+    include_recipe "osxdefaults::finder_unhide_home"
+end
+
 %w{
   /etc/apache2/conf/projects.d
   /etc/apache2/logs
