@@ -11,7 +11,7 @@ dblocation = value_for_platform(
 )
 
 execute "create the postgresql Skylab superuser" do
-   command "psql -d template1 -c 'create user skylab;' && touch #{dblocation}/.create-postgresql-skylab-user-success"
+   command "psql -d template1 -c 'create user skylab with SUPERUSER;' && touch #{dblocation}/.create-postgresql-skylab-user-success"
     user postgresuser
     not_if do ::File.exists?("#{dblocation}/.create-postgresql-skylab-user-success") end
 end
@@ -23,7 +23,7 @@ execute "create the postgresql Skylab superuser password" do
 end
 
 execute "grant the postgresql Skylab superuser" do
-    command "psql  -d template1 -c 'GRANT SELECT ON pg_shadow TO skylab;' && touch #{dblocation}/.grant-postgresql-skylab-user-success"
+    command "psql -d template1 -c 'GRANT SELECT ON pg_shadow TO skylab;' && touch #{dblocation}/.grant-postgresql-skylab-user-success"
     user postgresuser
     not_if do ::File.exists?("#{dblocation}/.grant-postgresql-skylab-user-success") end
 end
