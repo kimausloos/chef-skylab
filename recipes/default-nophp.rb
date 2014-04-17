@@ -1,4 +1,4 @@
-include_recipe "homebrewalt::default"
+include_recipe "skylab::packagemanager"
 include_recipe "git::default"
 include_recipe "skylab::postgresql"
 include_recipe "applications::mysql"
